@@ -1,0 +1,33 @@
+{
+  "$schema": "https://opencode.ai/config.json",
+
+  // ───────────────────────────────────────────────────────────────────────────
+  // Proyecto: 2026-UCO-git  ·  Práctica de Git + HTML
+  // Configuración de OpenCode (V2) específica de este repositorio.
+  // Nota: los agentes (.opencode/agents) y skills (.opencode/skills) se
+  // descubren automáticamente; no hace falta listarlos aquí.
+  // ───────────────────────────────────────────────────────────────────────────
+
+  // Agente principal por defecto: el orquestador delega cada tarea en los
+  // agentes especializados.
+  "default_agent": "orchestrator",
+
+  // Formatea automáticamente HTML/CSS/JS al escribirlos o editarlos.
+  "formatter": true,
+
+  // Reglas de seguridad del proyecto.
+  // El orden importa: la ÚLTIMA regla que coincide es la que gana, por eso las
+  // reglas amplias van primero y las excepciones después.
+  "permissions": [
+    { "action": "shell", "resource": "*", "effect": "allow" },
+
+    // Operaciones destructivas o irreversibles: siempre piden confirmación.
+    { "action": "shell", "resource": "git push*", "effect": "ask" },
+    { "action": "shell", "resource": "git push --force*", "effect": "ask" },
+    { "action": "shell", "resource": "git reset --hard*", "effect": "ask" },
+    { "action": "shell", "resource": "git clean -*", "effect": "ask" },
+    { "action": "shell", "resource": "git branch -D*", "effect": "ask" },
+    { "action": "shell", "resource": "git checkout .*", "effect": "ask" },
+    { "action": "shell", "resource": "rm -rf*", "effect": "ask" }
+  ]
+}
